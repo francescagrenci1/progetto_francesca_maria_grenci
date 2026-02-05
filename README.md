@@ -89,7 +89,7 @@ Importa i moduli `verifica_sintassi_fame.py` e `verifica_valenza_fame.py`, che u
 (nessuna libreria esterna richiesta)
 
 ### Installazione:
-Per eseguire il programma è necessario copiare i file `main.py`, `verifica_sintassi_fame.py`, `verifica_valenza_fame.py` in una cartella su Pycharm.
+Per eseguire il programma è necessario copiare i file `main.py`, `verifica_sintassi_fame.py`, `verifica_valenza_fame.py` in una cartella su Pycharm ed eseguire il `main.py`.
 Nel `main.py`, per verificare il funzionamento del programma su diversi esempi di molecole, è necessario inserire negli argomenti delle funzioni `verifica_sintassi_fame()` e `verifica_valenza()` la stinga della molecola da verificare, scegliendola eventualmente tra gli esempi già definiti.
 
 
