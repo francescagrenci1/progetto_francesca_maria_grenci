@@ -52,7 +52,7 @@ Dopo aver contemplato le varie casistiche, la funzione verifica che la valenza t
 
 ### `calcola_valenza_legami_ramificazione()`:
 **Input:**
-- sottostringa successiva all'atomo corrente, che inizia con "^" e termina con "&"
+- `substr: str`: sottostringa successiva all'atomo corrente, che inizia con "^" e termina con "&"
 
 **Output:**
 - `tuple[int, int]`: il primo valore corrisponde alla lunghezza della ramificazione, il secondo alla valenza dei legami contenuti in essa. Se la ramificazione non è presente, viene restiuito 0,0.
@@ -63,7 +63,7 @@ Dopo aver contemplato le varie casistiche, la funzione verifica che la valenza t
 
 ### `calcola_valenza_atomi_ramificazione()`:
 **Input:**
-- ramificazione (str) trovata da "calcola_valenza_legami_ramificazione"
+- `ramificazione: str`: trovata da "calcola_valenza_legami_ramificazione"
 
 **Output:**
 - `verifica_valenza: bool`: restituisce True se tutti gli atomi interni alla ramificazione hanno valenza valida.
