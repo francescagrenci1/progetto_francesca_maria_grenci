@@ -36,20 +36,41 @@ Il calcolo della valenza prevede l'utilizzo di due altre funzioni:
 ### 2. `verifica_valenza()`:
 **Parametri di input:**
 - stringa FAME valida
-- sottostringa successiva all'atomo corrente, che inizia con "^" e termina con "&"
 
 **Output:**
 - bool: restituisce `True` se la valenza della molecola è valida, `False` se non lo è
+
+**Processo di funzionamento:**
+
+Sono posibili 3 casisistiche:
+1)  Inizio della molecola: calcola la valenza dell'atomo considerando solo il carattere a destra del primo; deve però prima verificare se subito dopo l'atomo corrente vi è o meno una ramificazione. Chiama quindi la funzione `calcola_valenza_legami_ramificazione()` per cercare l'eventuale ramificazione e calcolare la valenza dei legami al suo interno: se la ramificazione è presente, viene calcolata prima la valenza dei legami e, successivamente, anche quella degli atomi al suo interno attraverso la funzione `calcola_valenza_atomi_ramificazione()`; se la ramificazione non è presente, `verifica_valenza()` calcola la valenza dell'atomo corrente considerando solo quella del legame subito successivo.
+Dopodoché, la funzione si sposta oltre la ramificazione per verificare la presenza di ulteriori legami: se li trova aggiunge la loro valenza a quella trovata;
+3) Fine della molecola: calcola la valenza dell'atomo considerando solo il carattere a sinistra dell'ultimo. L'iniziatore di una ramificazione non si può trovare sull'ultimo carattere della molecola: dunque la funzione `calcola_valenza_legami_ramificazione()` non viene chiamata, ma viene solo calcolata la valenza dell'atomo corrente considerando quella del legame subito precedente ad esso;
+4) Interno della ramificazione: calcola la valenza di ogni singolo atomo considerando i caratteri presenti sia destra che a sinistra. Questo caso è analogo al primo: per verificare la presenza di un'eventuale ramificazione viene chiamata la funzione `calcola_valenza_legami_ramificazione()`: se la ramificazione è presente viene chiamata anche la funzione `calcola_valenza_atomi_ramificazione()`; se invece la ramificazione non è presente, la valenza dell'atomo corrente viene calcolata da `verifica_valenza()` considerando quella dei legami che lo seguono e precedono.
+
+Dopo aver contemplato le varie casistiche, la funzione verifica che la valenza totale calcolata per ogni atomo corrisponda a quella massima stabilita nel protocollo FAME: se ciò risulta corretto restituisce 'True', altrimenti 'False'.
+
+### `calcola_valenza_legami_ramificazione()`:
+**Input:**
+- sottostringa successiva all'atomo corrente, che inizia con "^" e termina con "&"
+
+**Output:**
 - `tuple[int, int]`: il primo valore corrisponde alla lunghezza della ramificazione, il secondo alla valenza dei legami contenuti in essa. Se la ramificazione non è presente, viene restiuito 0,0.
 
 **Processo di funzionamento:**
-Si suddivide in 3 casisistiche:
-1)  Inizio della molecola: calcola la valenza dell'atomo considerando solo il carattere a destra del primo; deve però prima verificare se subito dopo l'atomo corrente vi è o meno una ramificazione. Chiama quindi la funzione `calcola_valenza_legami_ramificazione()` per cercare l'eventuale ramificazione e calcolare la valenza dei legami al suo interno; se la ramificazione non è presente calcola la valenza dell'atomo corrente considerando quella del legame subito successivo;
-2) Fine della molecola: calcola la valenza dell'atomo considerando solo il carattere a sinistra dell'ultimo. L'iniziatore di una ramificazione non si può trovare sull'ultimo carattere della molecola: dunque la funzione `calcola_valenza_legami_ramificazione()` non viene chiamata, ma viene solo calcolata la valenza dell'atomo corrente considerando quella del legame subito precedente ad esso;
-3) Interno della ramificazione: calcola la valenza di ogni singolo atomo considerando i caratteri presenti sia destra che a sinistra. Questo caso è analogo al primo: per verificare la presenza di un'eventuale ramificazione viene chiamata la funzione `calcola_valenza_legami_ramificazione()`; se la ramificazione non è presente la valenza dell'atomo corrente viene calcolata considerando quella dei legami che lo seguono e precedono.
+1) considera il primo carattere della stringa: se questo coincide con "^", significa che trova l'inizio della ramificazione (cioè della sottostringa), altrimenti la ramificazione non è presente;
+2) se trova l'inizio della ramificazione, inizia a scorrere su di essa fino a trovare la terminazione ("&"), calcolandone la lunghezza: a questo punto, calcola la valenza dei singoli legami compresi nella ramificazione, che sono associati all'atomo a sinistra, e restituisce i valori della lunghezza e della valenza dei legami della ramificazione.
 
-considera il primo carattere della stringa: se questo coincide con "^", significa che trova l'inizio della ramificazione (cioè della sottostringa), altrimenti la ramificazione non è presente;
-se trova l'inizio della ramificazione, inizia a scorrere su di essa fino a trovare la terminazione ("&"), calcolandone la lunghezza: a questo punto, calcola la valenza dei singoli legami compresi nella ramificazione, che sono associati all'atomo a sinistra, e restituisce i valori della lunghezza e della valenza dei legami della ramificazione
+### `calcola_valenza_atomi_ramificazione()`:
+**Input:**
+- ramificazione (str) trovata da "calcola_valenza_legami_ramificazione"
+
+**Output:**
+- `verifica_valenza: bool`: restituisce True se tutti gli atomi interni alla ramificazione hanno valenza valida.
+
+**Processo di funzionamento:**
+1) 
+
 
 
 
