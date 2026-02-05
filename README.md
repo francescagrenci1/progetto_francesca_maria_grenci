@@ -66,10 +66,19 @@ Dopo aver contemplato le varie casistiche, la funzione verifica che la valenza t
 - `ramificazione: str`: trovata da "calcola_valenza_legami_ramificazione"
 
 **Output:**
-- `verifica_valenza: bool`: restituisce True se tutti gli atomi interni alla ramificazione hanno valenza valida.
+- `verifica_valenza: bool`: restituisce `True` se tutti gli atomi interni alla ramificazione hanno valenza valida, altrimenti restituisce `False`
 
 **Processo di funzionamento:**
-1) 
+1) parte dal secondo indice dopo l'atomo da cui inizia la ramificazione (dopo "^" e il primo legame) perché esso corrisponde al primo atomo della stessa;
+2) finché si trova nella ramificazione, verifica solo la valenza del legame a sinistra, in quanto gli atomi della ramificazione non sono collegati tra loro, ma solo all'atomo radice;
+3) dopo il calcolo della valenza, la funzione verifica che essa corrisponda alla valenza massima possibile per quel determinato atomo: se la verifica è corretta, avanza di due posizioni per giungere all'atomo successivo fino a scansionare tutta la ramificazione.
+
+## Moduli
+### `moduli_fame.py`:
+Gestisce tutte le funzioni che caratterizzano il progetto, elencate nella sezione del READme "Dettaglio funzioni".
+
+### `main.py`:
+Contiene esempi di verifica dell'encoding FAME tramite l'utilizzo delle funzioni contenute in moduli_fame.py.
 
 
 
